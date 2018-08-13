@@ -13,6 +13,7 @@ public class indexController {
 
     @RequestMapping("/login")
     public String login(Model model){
+
         model.addAttribute("masge","登录");
         return "login";
     }
