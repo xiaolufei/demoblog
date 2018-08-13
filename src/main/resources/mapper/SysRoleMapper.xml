@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiaoma.demoblog.mapper.SysRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.xiaoma.demoblog.model.SysRole" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="role" property="role" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="INTEGER" />
+    <result column="creat_id" property="creatId" jdbcType="INTEGER" />
+    <result column="update_id" property="updateId" jdbcType="INTEGER" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="creat_time" property="creatTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.xiaoma.demoblog.model.SysRoleWithBLOBs" extends="BaseResultMap" >
+    <result column="modules" property="modules" jdbcType="LONGVARCHAR" />
+    <result column="describe" property="describe" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, role, name, version, creat_id, update_id, update_time, creat_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    modules, describe
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_role
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_role
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xiaoma.demoblog.model.SysRoleWithBLOBs" >
+    insert into sys_role (id, role, name, 
+      version, creat_id, update_id, 
+      update_time, creat_time, modules, 
+      describe)
+    values (#{id,jdbcType=INTEGER}, #{role,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{version,jdbcType=INTEGER}, #{creatId,jdbcType=INTEGER}, #{updateId,jdbcType=INTEGER}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{creatTime,jdbcType=TIMESTAMP}, #{modules,jdbcType=LONGVARCHAR}, 
+      #{describe,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xiaoma.demoblog.model.SysRoleWithBLOBs" >
+    insert into sys_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="role != null" >
+        role,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="creatId != null" >
+        creat_id,
+      </if>
+      <if test="updateId != null" >
+        update_id,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="creatTime != null" >
+        creat_time,
+      </if>
+      <if test="modules != null" >
+        modules,
+      </if>
+      <if test="describe != null" >
+        describe,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="role != null" >
+        #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="creatId != null" >
+        #{creatId,jdbcType=INTEGER},
+      </if>
+      <if test="updateId != null" >
+        #{updateId,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatTime != null" >
+        #{creatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modules != null" >
+        #{modules,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="describe != null" >
+        #{describe,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiaoma.demoblog.model.SysRoleWithBLOBs" >
+    update sys_role
+    <set >
+      <if test="role != null" >
+        role = #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="creatId != null" >
+        creat_id = #{creatId,jdbcType=INTEGER},
+      </if>
+      <if test="updateId != null" >
+        update_id = #{updateId,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatTime != null" >
+        creat_time = #{creatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modules != null" >
+        modules = #{modules,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="describe != null" >
+        describe = #{describe,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.xiaoma.demoblog.model.SysRoleWithBLOBs" >
+    update sys_role
+    set role = #{role,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      version = #{version,jdbcType=INTEGER},
+      creat_id = #{creatId,jdbcType=INTEGER},
+      update_id = #{updateId,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      creat_time = #{creatTime,jdbcType=TIMESTAMP},
+      modules = #{modules,jdbcType=LONGVARCHAR},
+      describe = #{describe,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiaoma.demoblog.model.SysRole" >
+    update sys_role
+    set role = #{role,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      version = #{version,jdbcType=INTEGER},
+      creat_id = #{creatId,jdbcType=INTEGER},
+      update_id = #{updateId,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      creat_time = #{creatTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
